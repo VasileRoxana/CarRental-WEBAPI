@@ -4,4 +4,19 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\ViewModelssss\**" />
+    <EmbeddedResource Remove="Models\ViewModelssss\**" />
+    <None Remove="Models\ViewModelssss\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\AppUser.cs" />
+    <Compile Remove="Models\BaseModels\AppUser.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.Frameworks" Version="5.4.0" />
+  </ItemGroup>
+
 </Project>

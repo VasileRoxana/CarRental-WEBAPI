@@ -1,5 +1,8 @@
+using CarRental.Domain.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,10 +24,14 @@ namespace CarRental.WebAPI
             services.AddControllers();
             services.ConfigureDbContext(Configuration);
             services.InjectRepositories();
-            services.InjectServices();
-            // services.AddIdentityCore<AppUser>(options => { });
-            services.AddMvc();
+            services.InjectServices(); 
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<CarRentalDbContext>();
         }
+ 
+        /// <param name="app"></param>
+        /// <param name="env"></param>
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,12 +45,18 @@ namespace CarRental.WebAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+           {
+               routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+           });
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
+
     }
 }

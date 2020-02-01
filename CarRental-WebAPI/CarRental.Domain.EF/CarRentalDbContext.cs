@@ -1,10 +1,11 @@
 ﻿using CarRental.Domain.EF.ModelConfigurations;
 using CarRental.Domain.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRental.Domain.EF
 {
-    public class CarRentalDbContext : DbContext
+    public class CarRentalDbContext : IdentityDbContext
     {
         public CarRentalDbContext(DbContextOptions options) : base(options)
         {
@@ -12,10 +13,11 @@ namespace CarRental.Domain.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CustomerEntityConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeEntityConfiguration());
         }
-
+          
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }

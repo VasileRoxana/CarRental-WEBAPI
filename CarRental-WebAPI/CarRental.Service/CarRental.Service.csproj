@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NuGet.Frameworks" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarRental.Domain.EF\CarRental.Domain.EF.csproj" />
   </ItemGroup>
 
