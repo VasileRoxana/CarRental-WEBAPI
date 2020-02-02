@@ -1,0 +1,27 @@
+﻿@model HomeDetailsViewModel
+
+@{
+    ViewBag.Title = "Car Details";
+}
+
+<h1>@Model.PageTitle</h1>
+
+<div>
+    Name: @Model.Car.CarName;
+</div>
+<div>
+    Type: @Model.Car.CarType;
+</div>
+<div>
+    Capacity: @Model.Car.Capacity;
+</div>
+<div>
+    Vehicle Class: @Model.Car.VehicleClass;
+</div>
+<div>
+    Price: @Model.Car.Price;
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}

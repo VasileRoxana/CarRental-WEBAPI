@@ -1,4 +1,6 @@
 using CarRental.Domain.EF;
+using CarRental.Domain.EF.IRepositories;
+using CarRental.Domain.EF.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +30,7 @@ namespace CarRental.WebAPI
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<CarRentalDbContext>();
+            services.AddSingleton<ICarRepository, MockCar>();
         }
  
         /// <param name="app"></param>
