@@ -16,9 +16,9 @@ namespace CarRental.Domain.EF
         {
             _carList = new List<Car>()
             {
-                new Car(0, "Honda", "sag", 2000, "qhas", 252),
-                new Car(1, "sah", "hash", 24, "hafj", 216),
-                new Car(2, "Sxha", "asg", 51, "yhsd", 126)
+                new Car(0, "Honda Civic", "B", 2000, "Sedan", 1000),
+                new Car(1, "Mercedes AMG", "B", 6000, "Cabrio", 2216),
+                new Car(2, "Lamborghini Murcielago", "B", 6000, "Sedan", 5126)
             };
         }
         public Car GetCarById(int Id)

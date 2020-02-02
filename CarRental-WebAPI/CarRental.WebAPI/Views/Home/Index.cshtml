@@ -9,17 +9,19 @@
      
     @foreach (var car in Model)
     {
-        <div class="card m-3">
-            <div class="card-header">
-                <h3>@car.CarName</h3>
-            </div>
-            <img class="card-img-top" src="~/images/noimage.jpg"/>
-            <div class="card-footer text-center">
-                <a href="#" class="btn btn-primary">View</a>
-                <a href="#" class="btn btn-primary">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
-            </div>
+    <div class="card m-3">
+        <div class="card-header">
+            <h3>@car.CarName</h3>
         </div>
+        <img class="card-img-top" src="https://lh3.googleusercontent.com/proxy/FDdW1hw8Ag2YcJOHc2_tiJf5t_gtWtc7hIwZz4WwjAnBjvCgXg559ns9OlRrkfS6YbpLgNib3fQthcJNco6ub2-Z1W0VmeMsSoGU99ylwY-M0r5b_TBW9vDiKmkPip1dlGRVwlX2"
+             asp-append-version="true"/>
+        <div class="card-footer text-center">
+            <a asp-controller="home" asp-action="details" asp-route-id="@car.Id" 
+               class="btn btn-primary m-1" >View</a>
+            <a href="#" class="btn btn-primary m-1">Edit</a>
+            <a href="#" class="btn btn-danger m-1">Delete</a>
+        </div>
+    </div>
         
     }
  </div>
