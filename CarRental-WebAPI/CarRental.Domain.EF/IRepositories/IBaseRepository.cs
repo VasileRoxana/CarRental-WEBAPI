@@ -12,7 +12,7 @@ namespace CarRental.Domain.EF
         Task<T> GetByIdAsync(int id);
         Task<List<T>> GetByCondition(Expression<Func<T, bool>> expression);
         Task<T> CreateAsync(T entity);
-        T Update(T entity);
-        T Delete(T entity);
+        //T Update(T entity);
+        //T Delete(T entity);
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,27 +14,34 @@ namespace CarRental.WebAPI
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.ConfigureDbContext(Configuration);
-            services.InjectRepositories();
-            services.InjectServices(); 
+            // every time an instance of CarRentalDb class is requested, instead of creating a new 
+            // instance ASP checks if there is an instance available in the Pool
+            services.AddDbContextPool<CarRentalDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("CarRentalDBConnection")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<CarRentalDbContext>();
-            services.AddScoped<ICarRepository, CarRepository>();
+
+            //services.AddControllers();
+            //services.ConfigureDbContext(Configuration);
+            //services.InjectRepositories();
+            //services.InjectServices(); 
+
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<CarRentalDbContext>();
+
             //using scoped because we want the instance of CarRepository class to 
             //be alive & available the entire time of a given HTTP Request
             //when a new HTTP Request arrives at the app, another instance of CarRepository will be created
+            services.AddScoped<ICarRepository, CarRepository>();
+            //services.AddScoped<ICarRepository, MockCar>();
         }
  
         /// <param name="app"></param>

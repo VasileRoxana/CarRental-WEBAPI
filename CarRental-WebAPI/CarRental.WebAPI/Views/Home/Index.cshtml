@@ -13,7 +13,7 @@
         <div class="card-header">
             <h3>@car.CarName</h3>
         </div>
-        <img class="card-img-top" src="https://cdn.motor1.com/images/mgl/VmvAB/s3/2020-honda-civic-type-r.jpg" 
+        <img class="card-img-top" src=@car.PhotoPath 
              asp-append-version="true"/>
         <div class="card-footer text-center">
             <a asp-controller="home" asp-action="details" asp-route-id="@car.Id" 

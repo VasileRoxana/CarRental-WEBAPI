@@ -9,7 +9,10 @@ namespace CarRental.Domain.EF.Repositories
    public class CarRepository : BaseRepository<Car>, ICarRepository
     {
         private readonly CarRentalDbContext context;
-        public CarRepository(CarRentalDbContext context) : base(context){ }
+        public CarRepository(CarRentalDbContext context) : base(context)
+        {
+            this.context = context;
+        }
 
         public Car Add(Car car)
         {

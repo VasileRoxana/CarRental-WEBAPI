@@ -45,24 +45,24 @@ namespace DAW.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPut("UpdateCustomer/{id}")]
-        public async Task<ObjectResult> UpdateCustomerAsync([FromBody] GeneralCustomerRequest request, [FromRoute] int id)
-        {
-            Customer result = _customerServices.CustomerRepository.Update(request.ToDTO(id));
-            await _customerServices.CommitChanges();
+        //[HttpPut("UpdateCustomer/{id}")]
+        //public async Task<ObjectResult> UpdateCustomerAsync([FromBody] GeneralCustomerRequest request, [FromRoute] int id)
+        //{
+        //    Customer result = _customerServices.CustomerRepository.Update(request.ToDTO(id));
+        //    await _customerServices.CommitChanges();
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
-        [HttpDelete("DeleteCustomer/{id}")]
-        public async Task<ObjectResult> DeleteCustomerAsync([FromRoute] int id)
-        {
-            Customer customer = await _customerServices.CustomerRepository.GetByIdAsync(id);
-            _customerServices.CustomerRepository.Delete(customer);
-            await _customerServices.CommitChanges();
+        //[HttpDelete("DeleteCustomer/{id}")]
+        //public async Task<ObjectResult> DeleteCustomerAsync([FromRoute] int id)
+        //{
+        //    Customer customer = await _customerServices.CustomerRepository.GetByIdAsync(id);
+        //    _customerServices.CustomerRepository.Delete(customer);
+        //    await _customerServices.CommitChanges();
 
-            return Ok(customer);
-        }
+        //    return Ok(customer);
+        //}
 
     }
 }

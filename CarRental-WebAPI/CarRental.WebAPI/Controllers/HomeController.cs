@@ -34,12 +34,14 @@ namespace CarRental.WebAPI.Controllers
             };
             return View(homeDetailsViewModel);
         }
+
         // Get method for the create button from navbar
         [HttpGet]
         public ViewResult Create()
         {
             return View();
         }
+
         // Post method for creating a new car and displaying it
         [HttpPost]
         public IActionResult Create(Car car)

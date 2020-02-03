@@ -9,7 +9,7 @@ namespace CarRental.Domain.Models
     public class Car : BaseEntity
     {
 
-        public Car(int id, string v1, CarClass v2, int v3, CarType v4, float v5)
+        public Car(int id, string v1, CarClass v2, int v3, CarType v4, float v5, string photo)
         {
             this.Id = id;
             this.CarName = v1;
@@ -17,6 +17,7 @@ namespace CarRental.Domain.Models
             this.Capacity = v3;
             this.CarType = v4;
             this.Price = v5;
+            this.PhotoPath = photo;
         }
 
         public Car() { }
@@ -32,5 +33,7 @@ namespace CarRental.Domain.Models
         public CarType? CarType { get; set; }
         [Required]
         public float? Price { get; set; }
+        [Required]
+        public string PhotoPath { get; set; }
     }
 }

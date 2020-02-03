@@ -38,15 +38,15 @@ namespace CarRental.Domain.EF.Repositories
             return result.Entity;
         }
 
-        public T Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public T Delete(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
               
 
-        public T Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public T Update(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
