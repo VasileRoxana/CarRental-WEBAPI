@@ -2,6 +2,7 @@
 using CarRental.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace CarRental.Domain.EF
         {
             _carList = new List<Car>()
             {
-                new Car(0, "Honda Civic", "B", 2000, "Sedan", 1000),
-                new Car(1, "Mercedes AMG", "B", 6000, "Cabrio", 2216),
-                new Car(2, "Lamborghini Murcielago", "B", 6000, "Sedan", 5126)
+                new Car(0, "Honda Civic", CarClass.B, 2000, CarType.Berlina, 1000),
+                new Car(1, "Mercedes AMG", CarClass.B, 6000, CarType.Cabrio, 2216),
+                new Car(2, "Lamborghini Murcielago", CarClass.B, 6000, CarType.Berlina, 5126)
             };
         }
         public Car GetCarById(int Id)
@@ -29,6 +30,14 @@ namespace CarRental.Domain.EF
         public IEnumerable<Car> GetAllCars()
         {
             return _carList;
+        }
+
+        public Car Add(Car car)
+        {
+            car.Id = _carList.Max(c => c.Id) + 1;
+            _carList.Add(car);
+            return car;
+
         }
         public Task<Car> CreateAsync(Car entity)
         {

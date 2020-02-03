@@ -25,30 +25,32 @@ namespace CarRental.WebAPI.Controllers
             return View(model); 
         }
 
-        public ViewResult Details(int Id)
+        public ViewResult Details(int ? id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Car = _carRepository.GetCarById(Id),
+                Car = _carRepository.GetCarById(id ?? 1),
                 PageTitle = "Car Details"
             };
             return View(homeDetailsViewModel);
         }
-
-        //public ViewResult Index()
-        //{
-        //    var model = _carRepository.GetAllAsync();
-        //    return View(model);
-        //}
-
-        //public ViewResult Details(int id)
-        //{
-        //    HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
-        //    {
-        //        Car = _carRepository.GetCarById(id),
-        //        PageTitle = "Car Details"
-        //    };
-        //return View(homeDetailsViewModel);
-        //}
+        // Get method for the create button from navbar
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+        // Post method for creating a new car and displaying it
+        [HttpPost]
+        public IActionResult Create(Car car)
+        {
+            // check if we have valid data in the form
+            if (ModelState.IsValid)
+            {
+                Car newCar = _carRepository.Add(car);
+                return RedirectToAction("details", new { id = newCar.Id });
+            }
+            return View();
+        }
     }
 }

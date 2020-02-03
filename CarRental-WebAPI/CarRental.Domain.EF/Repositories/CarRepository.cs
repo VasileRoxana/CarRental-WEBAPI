@@ -11,6 +11,11 @@ namespace CarRental.Domain.EF.Repositories
 
         public CarRepository(CarRentalDbContext context) : base(context){ }
 
+        public Car Add(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Car> GetAllCars()
         {
             throw new NotImplementedException();

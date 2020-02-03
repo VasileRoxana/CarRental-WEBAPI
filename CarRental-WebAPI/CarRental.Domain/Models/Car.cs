@@ -1,6 +1,7 @@
 ﻿using CarRental.Domain.Models.BaseModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CarRental.Domain.Models
@@ -8,7 +9,7 @@ namespace CarRental.Domain.Models
     public class Car : BaseEntity
     {
 
-        public Car(int id, string v1, string v2, int v3, string v4, float v5)
+        public Car(int id, string v1, CarClass v2, int v3, CarType v4, float v5)
         {
             this.Id = id;
             this.CarName = v1;
@@ -18,10 +19,18 @@ namespace CarRental.Domain.Models
             this.Price = v5;
         }
 
+        public Car() { }
+
+        // The required fields need to be mandatory
+        [Required]
         public string CarName { get; set; }
-        public string VehicleClass{ get; set; }
-        public int Capacity { get; set; }
-        public string CarType { get; set; }
-        public float Price { get; set; }
+        [Required]
+        public CarClass? VehicleClass { get; set; }
+        [Required]
+        public int? Capacity { get; set; }
+        [Required]
+        public CarType? CarType { get; set; }
+        [Required]
+        public float? Price { get; set; }
     }
 }
