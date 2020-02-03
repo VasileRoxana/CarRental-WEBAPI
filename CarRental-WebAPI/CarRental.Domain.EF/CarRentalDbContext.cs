@@ -16,6 +16,7 @@ namespace CarRental.Domain.EF
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CustomerEntityConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeEntityConfiguration());
+           // modelBuilder.Seed();
         }
           
         public DbSet<Car> Cars { get; set; }

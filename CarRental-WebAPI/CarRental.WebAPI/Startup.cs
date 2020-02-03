@@ -30,7 +30,10 @@ namespace CarRental.WebAPI
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<CarRentalDbContext>();
-            services.AddSingleton<ICarRepository, MockCar>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            //using scoped because we want the instance of CarRepository class to 
+            //be alive & available the entire time of a given HTTP Request
+            //when a new HTTP Request arrives at the app, another instance of CarRepository will be created
         }
  
         /// <param name="app"></param>
@@ -43,9 +46,15 @@ namespace CarRental.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
+
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthentication();

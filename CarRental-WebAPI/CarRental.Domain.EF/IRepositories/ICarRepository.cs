@@ -8,5 +8,7 @@ namespace CarRental.Domain.EF.IRepositories
         Car GetCarById(int Id);
         IEnumerable<Car> GetAllCars();
         Car Add(Car car);
+        Car Update(Car carChanges);
+        Car Delete(int Id);
     }
 }

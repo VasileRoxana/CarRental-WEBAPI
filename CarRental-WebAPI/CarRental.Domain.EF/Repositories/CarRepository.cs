@@ -8,30 +8,46 @@ namespace CarRental.Domain.EF.Repositories
 {
    public class CarRepository : BaseRepository<Car>, ICarRepository
     {
-
+        private readonly CarRentalDbContext context;
         public CarRepository(CarRentalDbContext context) : base(context){ }
 
         public Car Add(Car car)
         {
-            throw new NotImplementedException();
+            context.Cars.Add(car);
+            context.SaveChanges();
+            return car;
         }
 
+        public Car Delete(int id)
+        {
+            Car car = context.Cars.Find(id);
+            if(car != null)
+            {
+                context.Cars.Remove(car);
+                context.SaveChanges();
+            }
+            return car;
+        }
         public IEnumerable<Car> GetAllCars()
         {
-            throw new NotImplementedException();
+            if (context != null)
+            { 
+                return context.Cars;
+            }
+            return null;
         }
 
         public Car GetCarById(int Id)
         {
-            throw new NotImplementedException();
+            return context.Cars.Find(Id);
         }
 
-        //public Car GetCarById(int Id)
-        //{
-        //    //CarRentalDbContext dbContext = new CarRentalDbContext;
-        //    //return dbContext.Cars.Find(Id);
-
-        //    return ;
-        //}
+        public Car Update(Car carChanges)
+        {
+            var car = context.Cars.Attach(carChanges);
+            car.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return carChanges;
+        }
     }
 }

@@ -69,6 +69,9 @@ namespace CarRental.Domain.EF
             throw new NotImplementedException();
         }
 
-        
+        public Car Delete(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
