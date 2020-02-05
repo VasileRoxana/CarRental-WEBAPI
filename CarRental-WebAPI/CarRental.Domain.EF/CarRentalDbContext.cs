@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarRental.Domain.EF
 {
-    public class CarRentalDbContext : DbContext
+    public class CarRentalDbContext : IdentityDbContext
     {
         public CarRentalDbContext(DbContextOptions <CarRentalDbContext> options) : 
             base(options)
@@ -15,6 +15,7 @@ namespace CarRental.Domain.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Car>().HasData(
                 new Car
                 {

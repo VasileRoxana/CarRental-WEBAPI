@@ -1,10 +1,12 @@
 using CarRental.Domain.EF;
 using CarRental.Domain.EF.IRepositories;
 using CarRental.Domain.EF.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,18 +30,31 @@ namespace CarRental.WebAPI
             services.AddDbContextPool<CarRentalDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("CarRentalDBConnection")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            //services.AddMvc(config =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                    .RequireAuthenticatedUser()
+            //                    .Build();
+            //    config.Filters.Add(new AuthorizeFilter(policy));
+            //});
+            services.AddControllers();
+            services.ConfigureDbContext(Configuration);
+            services.InjectRepositories();
+            services.InjectServices(); 
 
-            //services.AddControllers();
-            //services.ConfigureDbContext(Configuration);
-            //services.InjectRepositories();
-            //services.InjectServices(); 
-
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<CarRentalDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<CarRentalDbContext>();
 
             //using scoped because we want the instance of CarRepository class to 
             //be alive & available the entire time of a given HTTP Request
-            //when a new HTTP Request arrives at the app, another instance of CarRepository will be created
+            //when a new HTTP Request arrives at the app, another instance of C arRepository will be created
             services.AddScoped<ICarRepository, CarRepository>();
             //services.AddScoped<ICarRepository, MockCar>();
         }
@@ -50,6 +65,8 @@ namespace CarRental.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,12 +77,13 @@ namespace CarRental.WebAPI
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
             }
 
-
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
             app.UseRouting();
+            
 
-            app.UseAuthentication();
             app.UseMvc(routes =>
            {
                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
@@ -74,6 +92,7 @@ namespace CarRental.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
         }

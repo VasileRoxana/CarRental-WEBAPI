@@ -1,0 +1,77 @@
+﻿@model CarEditViewModel
+
+@{
+    ViewBag.Title = "Edit Car";
+}
+
+<form asp-controller="home" asp-action="edit" method="post" class="mt-3">
+    <input hidden asp-for="Id" />
+    <input hidden asp-for="ExistingPhotoPath" />
+    <div class="form-group row">
+        <label asp-for="CarName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="CarName" class="form-control" placeholder="Name">
+            @*print validation error*@
+            <span asp-validation-for="CarName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="VehicleClass" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="VehicleClass" class="custom-select mr-sm-2"
+                    asp-items="Html.GetEnumSelectList<CarClass>()">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="VehicleClass" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Capacity" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Capacity" class="form-control" placeholder="Capacity">
+            @*print validation error*@
+            <span asp-validation-for="Capacity" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="CarType" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="CarType" class="custom-select mr-sm-2"
+                    asp-items="Html.GetEnumSelectList<CarType>()">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="CarType" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Price" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Price" class="form-control" placeholder="Price">
+            @*print validation error*@
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="PhotoPath" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for=@Model.ExistingPhotoPath class="form-control" placeholder="PhotoPath">
+            @*print validation error*@
+            <span asp-validation-for="PhotoPath" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row col-sm-4 offset-4">
+        <img class="card-img-top" src=@Model.ExistingPhotoPath asp-append-version="true" />
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-controller="home" asp-action="index"
+               class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>

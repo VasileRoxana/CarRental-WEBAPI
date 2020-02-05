@@ -14,7 +14,8 @@ namespace CarRental.WebAPI
     {
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = config["ConnectionStrings:CarRentalWebAPIContextConnection"];
+            //string connectionString = config["ConnectionStrings:CarRentalWebAPIContextConnection"];
+            string connectionString = config["ConnectionStrings:CarRentalDBConnection"];
             services.AddDbContext < CarRentalDbContext>(c => c.UseSqlServer(connectionString, b => b.MigrationsAssembly("CarRental.WebAPI")));
         }
 

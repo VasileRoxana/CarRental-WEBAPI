@@ -58,7 +58,6 @@ namespace CarRental.Domain.EF.Migrations
                             Capacity = 2412,
                             CarName = "BMW M5",
                             CarType = 4,
-                            PhotoPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAm1C05DaazFiRWcfM3m8FqayaOa-T64ushgHosW4gZwoJXUp1",
                             Price = 251f,
                             VehicleClass = 2
                         },
@@ -68,7 +67,6 @@ namespace CarRental.Domain.EF.Migrations
                             Capacity = 1242,
                             CarName = "BMW M1",
                             CarType = 2,
-                            PhotoPath = "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/911-road-3629a.jpg?itok=m6x23Go0",
                             Price = 2511f,
                             VehicleClass = 1
                         });
