@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarRental.WebAPI.Controllers
 {
-   // [Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: /<controller>/

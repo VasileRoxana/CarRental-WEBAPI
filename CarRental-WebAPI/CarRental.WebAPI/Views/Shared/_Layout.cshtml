@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-@inject  SignInManager<IdentityUser> signInManager;
+@inject SignInManager<IdentityUser> signInManager;
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="refresh" />
@@ -46,11 +46,6 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="account" asp-action="register">
-                                Register
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" asp-controller="account" asp-action="login">
                                 Login
                             </a>
@@ -64,7 +59,7 @@
         </nav>
 
         <div>
-            @RenderBody()   
+            @RenderBody()
         </div>
 
         @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -75,6 +70,6 @@
         {
             @RenderSection("Scripts", required: true)
         }
-        </div>
+    </div>
 </body>
 </html>
