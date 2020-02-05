@@ -2,11 +2,13 @@
 
 @{
     ViewBag.Title = "Edit Car";
+    var photoPath = "~/img/" + Model.ExistingPhotoPath;
 }
 
-<form asp-controller="home" asp-action="edit" method="post" class="mt-3">
+<form asp-controller="home" asp-action="edit" enctype="multipart/form-data" method="post" class="mt-3">
     <input hidden asp-for="Id" />
     <input hidden asp-for="ExistingPhotoPath" />
+
     <div class="form-group row">
         <label asp-for="CarName" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
@@ -53,16 +55,18 @@
     </div>
 
     <div class="form-group row">
-        <label asp-for="PhotoPath" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for=@Model.ExistingPhotoPath class="form-control" placeholder="PhotoPath">
-            @*print validation error*@
-            <span asp-validation-for="PhotoPath" class="text-danger"></span>
+            <div class="custom-file">
+                <input asp-for="Photo" class="custom-file-input form-control">
+                <label class="custom-file-label">Click here to change photo</label>
+            </div>
         </div>
     </div>
 
+    @*Display the existing employee photo*@
     <div class="form-group row col-sm-4 offset-4">
-        <img class="card-img-top" src=@Model.ExistingPhotoPath asp-append-version="true" />
+        <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
     </div>
 
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -74,4 +78,15 @@
                class="btn btn-primary">Cancel</a>
         </div>
     </div>
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }
 </form>
