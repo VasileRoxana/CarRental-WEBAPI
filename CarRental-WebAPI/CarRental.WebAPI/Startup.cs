@@ -28,8 +28,9 @@ namespace CarRental.WebAPI
             // every time an instance of CarRentalDb class is requested, instead of creating a new 
             // instance ASP checks if there is an instance available in the Pool
             services.AddDbContextPool<CarRentalDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("CarRentalDBConnection")));
+                options => options.UseSqlServer(Configuration.GetConnectionString("CarRentalDBConnectionV2.0")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
             //services.AddMvc(config =>
             //{
             //    var policy = new AuthorizationPolicyBuilder()
