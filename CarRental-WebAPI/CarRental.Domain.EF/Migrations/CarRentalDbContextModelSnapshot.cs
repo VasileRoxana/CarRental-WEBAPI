@@ -37,9 +37,6 @@ namespace CarRental.Domain.EF.Migrations
                     b.Property<int>("CarType")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhotoPath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<float?>("Price")
                         .IsRequired()
                         .HasColumnType("real");

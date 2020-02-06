@@ -129,6 +129,33 @@ namespace CarRental.WebAPI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteCar(int id)
+        {
+            var car = await _carRepository.GetByIdAsync(id);
+
+            if (car == null)
+            {
+                ViewBag.ErrorMessage = $"Car with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = _carRepository.Delete(id);
+
+                if (result != null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    throw new NullReferenceException();
+                }
+
+                //return View("Index");
+            }
+        }
+
         private string ProcessUploadedFile(CarCreateViewModel model)
         {
             string uniqueFileName = null;
