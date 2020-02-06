@@ -1,8 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-
-
-@inject SignInManager<IdentityUser> signInManager;
+﻿@inject SignInManager<IdentityUser> signInManager;
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="refresh" />
@@ -31,6 +27,22 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="home" asp-action="create">Create</a>
                     </li>
+
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Administration"
+                                   asp-action="ListUsers">Users</a>
+                                <a class="dropdown-item" asp-controller="Administration"
+                                   asp-action="ListRoles">Roles</a>
+                            </div>
+                        </li>
+                    }
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     @if (signInManager.IsSignedIn(User))
@@ -38,7 +50,7 @@
                         <li class="nav-item">
                             <form methon="post" asp-action="logout" asp-controller="account">
                                 <button type="submit" class="nav-link btn btn-link py-0"
-                                        style="width:auto">
+                                        style="width:auto; margin: auto">
                                     Logout @User.Identity.Name
                                 </button>
                             </form>
@@ -51,10 +63,12 @@
                                 Login
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="register">Register</a>
+                        </li>
+
                     }
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="account" asp-action="register">Register</a>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -73,4 +87,3 @@
         }
     </div>
 </body>
-</html>

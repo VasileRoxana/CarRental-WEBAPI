@@ -20,7 +20,11 @@ namespace CarRental.WebAPI.Controllers
     {
         // GET: /<controller>/
         private readonly ICarRepository _carRepository;
+
+        [Obsolete]
         private readonly IHostingEnvironment hostingEnvironment;
+
+        [Obsolete]
         public HomeController(ICarRepository carRepository, 
                               IHostingEnvironment hostingEnvironment ) {
             _carRepository = carRepository;
