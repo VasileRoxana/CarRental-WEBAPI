@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CarRental.Domain.Models.ViewModels
 {
@@ -10,7 +7,8 @@ namespace CarRental.Domain.Models.ViewModels
         public string UserName { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        //[RemoteAttribute(action:"IsEmailInUse", controller: "AccountController")]
         public string Email { get; set; }
 
         [Required]
@@ -19,7 +17,7 @@ namespace CarRental.Domain.Models.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password",
+        [System.ComponentModel.DataAnnotations.Compare("Password",
             ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

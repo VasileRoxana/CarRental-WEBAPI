@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarRental.WebAPI.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -21,6 +21,23 @@ namespace CarRental.WebAPI.Controllers
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+        }
+
+        [AllowAnonymous]
+        // [HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> IsEmailInUse(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Email {email} is already in use");
+            }
         }
 
         [AllowAnonymous]
@@ -81,7 +98,7 @@ namespace CarRental.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             //if modelState is valid we try to sign the user in
             //if signed is succesful in we redirect to the home view
@@ -95,7 +112,14 @@ namespace CarRental.WebAPI.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
+                    }
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
