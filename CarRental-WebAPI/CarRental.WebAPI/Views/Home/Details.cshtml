@@ -38,7 +38,7 @@
                         <button type="submit" class="btn btn-danger m-1">Delete</button>
                     }
                     @if (signInManager.IsSignedIn(User)){
-                    <a asp-controller="home" asp-action="index"
+                    <a asp-controller="reservation" asp-action="reservation" asp-route-id="@Model.Car.Id"
                        class="btn btn-info m-1">Rent this car!</a>
                     }
 

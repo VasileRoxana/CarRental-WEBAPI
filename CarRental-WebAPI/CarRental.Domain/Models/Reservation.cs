@@ -5,10 +5,11 @@ namespace CarRental.Domain.Models
 {
     public class Reservation : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int CarId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
 
+        
     }
 }

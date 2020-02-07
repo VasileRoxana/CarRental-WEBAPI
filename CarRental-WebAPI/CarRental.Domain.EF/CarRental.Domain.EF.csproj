@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200203225232_AddPhotoPath.cs" />
-    <Compile Remove="Migrations\20200203225232_AddPhotoPath.Designer.cs" />
-    <Compile Remove="Migrations\20200203230244_AddPhotoPathData.cs" />
-    <Compile Remove="Migrations\20200203230244_AddPhotoPathData.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />

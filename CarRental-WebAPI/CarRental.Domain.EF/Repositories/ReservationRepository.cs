@@ -29,7 +29,7 @@ namespace CarRental.Domain.EF.Repositories
             return reservation;
         }
 
-        public Reservation GetReservationByUserId(int Id)
+        public Reservation GetReservationByUserId(string Id)
         {
             foreach(var e in context.Reservations)
             {

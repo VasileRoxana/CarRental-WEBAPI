@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CarRental.WebAPI.Migrations
+namespace CarRental.Domain.EF.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20200201215031_migratie3")]
-    partial class migratie3
+    [Migration("20200206234913_ReservationModif")]
+    partial class ReservationModif
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,24 +28,53 @@ namespace CarRental.WebAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Capacity")
+                    b.Property<int?>("Capacity")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("CarName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CarType")
+                    b.Property<int>("CarType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
+                    b.Property<float?>("Price")
+                        .IsRequired()
                         .HasColumnType("real");
 
-                    b.Property<string>("VehicleClass")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("VehicleClass")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 20,
+                            Capacity = 2412,
+                            CarName = "BMW M5",
+                            CarType = 4,
+                            PhotoPath = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAm1C05DaazFiRWcfM3m8FqayaOa-T64ushgHosW4gZwoJXUp1",
+                            Price = 251f,
+                            VehicleClass = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 1242,
+                            CarName = "BMW M1",
+                            CarType = 2,
+                            PhotoPath = "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/911-road-3629a.jpg?itok=m6x23Go0",
+                            Price = 2511f,
+                            VehicleClass = 1
+                        });
                 });
 
             modelBuilder.Entity("CarRental.Domain.Models.Customer", b =>
@@ -74,8 +103,6 @@ namespace CarRental.WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Id");
 
                     b.ToTable("Customers");
                 });
@@ -110,8 +137,6 @@ namespace CarRental.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
-
                     b.HasIndex("SuperiorIdId");
 
                     b.ToTable("Employees");
@@ -124,20 +149,17 @@ namespace CarRental.WebAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
+                    b.Property<string>("EndDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehicleClass")
-                        .HasColumnType("int");
+                    b.Property<string>("StartDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

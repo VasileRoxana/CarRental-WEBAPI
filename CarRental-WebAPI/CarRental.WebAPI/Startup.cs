@@ -56,6 +56,7 @@ namespace CarRental.WebAPI
             //be alive & available the entire time of a given HTTP Request
             //when a new HTTP Request arrives at the app, another instance of C arRepository will be created
             services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
             //services.AddScoped<ICarRepository, MockCar>();
         }
  
