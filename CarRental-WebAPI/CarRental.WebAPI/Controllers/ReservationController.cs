@@ -3,8 +3,10 @@ using CarRental.Domain.EF.IRepositories;
 using CarRental.Domain.Models;
 using CarRental.Domain.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace CarRental.WebAPI.Controllers
             this.userManager = userManager;
             this._reservationRepository = reservationRepository;
         }
+        
         [HttpGet]
         public IActionResult ListReservations(string id)
         {

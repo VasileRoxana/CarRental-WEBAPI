@@ -4,6 +4,7 @@ using CarRental.Domain.EF.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -57,6 +58,7 @@ namespace CarRental.WebAPI
             //when a new HTTP Request arrives at the app, another instance of C arRepository will be created
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddScoped<ICarRepository, MockCar>();
         }
  

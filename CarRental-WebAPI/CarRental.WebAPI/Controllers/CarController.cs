@@ -16,7 +16,6 @@ namespace CarRental.WebAPI.Controllers
     public class CarController : Controller
     {
         private readonly ICarRepository _carRepository;
-
         [Obsolete]
         private readonly IHostingEnvironment hostingEnvironment;
 
