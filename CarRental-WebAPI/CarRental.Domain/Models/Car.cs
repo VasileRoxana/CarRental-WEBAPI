@@ -33,7 +33,6 @@ namespace CarRental.Domain.Models
         public CarType? CarType { get; set; }
         [Required]
         public float? Price { get; set; }
-        [Required]
         public string PhotoPath { get; set; }
     }
 }

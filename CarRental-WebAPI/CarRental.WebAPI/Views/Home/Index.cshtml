@@ -25,10 +25,11 @@
                                class="btn btn-info m-1">View</a>
                             @if (signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                             {
-                                <a asp-action="edit" asp-controller="home"
+                                <a asp-controller="car" asp-action="edit" 
                                    asp-route-id="@car.Id"
                                    class="btn btn-primary m-1">Edit</a>
-                                <button type="submit" class="btn btn-danger m-1">Delete</button>
+                                <button asp-controller="car" asp-action="DeleteCar" asp-route-id="@car.Id"
+                                        type="submit" class="btn btn-danger m-1">Delete</button>
                             }
 
                         </div>
