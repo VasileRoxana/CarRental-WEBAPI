@@ -1,5 +1,6 @@
 ﻿using CarRental.Domain.EF.IRepositories;
 using CarRental.Domain.Models;
+using System.Collections.Generic;
 
 namespace CarRental.Domain.EF.Repositories
 {
@@ -29,17 +30,17 @@ namespace CarRental.Domain.EF.Repositories
             return reservation;
         }
 
-        public Reservation GetReservationByUserId(string Id)
+        public List<Reservation> GetReservationsByUserId(string Id)
         {
-            foreach(var e in context.Reservations)
+            List<Reservation> reservations = new List<Reservation>();
+            foreach (var e in context.Reservations)
             {
                 if (e.UserId == Id)
                 {
-                    return e;
+                    reservations.Add(e);
                 }
             }
-            return null;
-            
+            return reservations;
         }
     }
 }

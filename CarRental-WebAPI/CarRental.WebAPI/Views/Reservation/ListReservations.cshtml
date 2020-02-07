@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<Reservation>
+
+@{
+    ViewBag.Title = "Reservations List";
+}
+
+<div style="width:50%; margin:auto;">
+    <h1>All user's reservations</h1>
+    @if (Model.Any())
+    {
+        @foreach (var e in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    Reservation Id : @e.Id
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Start Date: @e.StartDate</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">End Date: @e.EndDate</h5>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                No reservations created yet
+            </div>
+        </div>
+    }
+</div>

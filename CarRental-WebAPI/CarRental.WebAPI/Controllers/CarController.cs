@@ -1,6 +1,7 @@
 ﻿using CarRental.Domain.EF.IRepositories;
 using CarRental.Domain.Models;
 using CarRental.Domain.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarRental.WebAPI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CarController : Controller
     {
         private readonly ICarRepository _carRepository;
@@ -104,8 +106,6 @@ namespace CarRental.WebAPI.Controllers
                 {
                     car.PhotoPath = "~/img/noaccess.jpg";
                 }
-
-                
             }
             return View();
         }
@@ -136,7 +136,6 @@ namespace CarRental.WebAPI.Controllers
                 //return View("Index");
             }
         }
-
         private string ProcessUploadedFile(CarCreateViewModel model)
         {
             string uniqueFileName = null;
@@ -147,7 +146,6 @@ namespace CarRental.WebAPI.Controllers
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 model.Photo.CopyTo(new FileStream(filePath, FileMode.CreateNew));
             }
-
             return uniqueFileName;
         }
     }

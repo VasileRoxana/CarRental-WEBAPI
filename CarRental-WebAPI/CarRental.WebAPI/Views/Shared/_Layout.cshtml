@@ -1,4 +1,7 @@
 ﻿@inject SignInManager<IdentityUser> signInManager;
+@inject UserManager<IdentityUser> userManager;
+@*@model IdentityUser*@
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="refresh" />
@@ -24,12 +27,12 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="home" asp-action="index">List</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="car" asp-action="create">Create</a>
-                    </li>
 
                     @if (signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                     {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="car" asp-action="create">Create</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,6 +51,12 @@
                 <ul class="navbar-nav ml-auto">
                     @if (signInManager.IsSignedIn(User))
                     {
+                        IdentityUser user = new IdentityUser();
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="reservation" asp-action="ListReservations"
+                               asp-route-id="@user.UserName">Reservations</a>
+                        </li>
                         <li class="nav-item">
                             <form methon="post" asp-action="logout" asp-controller="account">
                                 <button type="submit" class="nav-link btn btn-link py-0"
@@ -78,14 +87,9 @@
             @RenderBody()
         </div>
 
-        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>*@
-
         @if (IsSectionDefined("Scripts"))
         {
             @RenderSection("Scripts", required: true)
         }
     </div>
 </body>
-</html>

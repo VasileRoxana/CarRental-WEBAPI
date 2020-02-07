@@ -32,16 +32,21 @@
                        class="btn btn-info m-1">Back</a>
                     @if (signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                     {
-                        <a asp-controller="car" asp-action="edit" 
+                        <a asp-controller="car" asp-action="edit"
                            asp-route-id="@Model.Car.Id"
                            class="btn btn-primary m-1">Edit</a>
                         <button type="submit" class="btn btn-danger m-1">Delete</button>
                     }
-                    @if (signInManager.IsSignedIn(User)){
-                    <a asp-controller="reservation" asp-action="reservation" asp-route-id="@Model.Car.Id"
-                       class="btn btn-info m-1">Rent this car!</a>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <a asp-controller="reservation" asp-action="reservation" asp-route-id="@Model.Car.Id"
+                           class="btn btn-info m-1">Rent this car!</a>
                     }
-
+                    @if (!signInManager.IsSignedIn(User))
+                    {
+                        <a asp-controller="reservation" asp-action="reservation" asp-route-id="@Model.Car.Id"
+                           class="nav-link" >Login or Register to rent this car!</a>
+                    }
                 </div>
             </form>
         </div>

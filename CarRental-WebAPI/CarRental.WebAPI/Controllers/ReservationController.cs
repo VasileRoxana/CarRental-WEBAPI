@@ -1,6 +1,8 @@
-﻿using CarRental.Domain.EF.IRepositories;
+﻿using CarRental.Domain.EF;
+using CarRental.Domain.EF.IRepositories;
 using CarRental.Domain.Models;
 using CarRental.Domain.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarRental.WebAPI.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ReservationController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -19,7 +22,13 @@ namespace CarRental.WebAPI.Controllers
             this.userManager = userManager;
             this._reservationRepository = reservationRepository;
         }
-
+        [HttpGet]
+        public IActionResult ListReservations(string id)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            reservations = _reservationRepository.GetReservationsByUserId(id);
+            return View(reservations);
+        }
         private Task<IdentityUser> GetCurrentUserAsync() => userManager.GetUserAsync(HttpContext.User);
 
         [HttpGet]
@@ -35,7 +44,6 @@ namespace CarRental.WebAPI.Controllers
         [HttpPost]
         public async Task<ViewResult> ReservationAsync(ReservationViewModel reservationViewModel, int id)
         {
-           // ReservationViewModel reservationViewModel = new ReservationViewModel();
             // check if we have valid data in the form
             if (ModelState.IsValid)
             {

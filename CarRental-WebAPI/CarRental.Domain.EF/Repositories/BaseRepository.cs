@@ -37,16 +37,5 @@ namespace CarRental.Domain.EF.Repositories
             EntityEntry<T> result = await _context.Set<T>().AddAsync(entity);
             return result.Entity;
         }
-
-        //public T Delete(T entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-              
-
-        //public T Update(T entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
